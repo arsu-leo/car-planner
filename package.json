@@ -1,0 +1,25 @@
+{
+  "name": "car-planner",
+  "version": "0.0.1",
+  "description": "Car filling planner",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm install && npm update && node index.js",
+    "offline": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arsu-leo/car-planner.git"
+  },
+  "author": "Lleonard Subirana Armentano",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/arsu-leo/car-planner/issues"
+  },
+  "homepage": "https://github.com/arsu-leo/car-planner#readme",
+  "dependencies": {
+    "@superhero/core": "^0.5.8",
+    "@superhero/debug": "^1.1.4"
+  }
+}

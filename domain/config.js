@@ -6,10 +6,9 @@ module.exports = {
         },
         routes : [
             {
-                policy : '', //Can be regex
-                dispatcher : '',
-                view : ''
-
+                policy : '/', //Can be regex
+                dispatcher : 'controllers/index',
+                view : 'views/index'
             }
         ]
     }
