@@ -1,0 +1,203 @@
+body
+{
+  background: #fafafa;
+  color: rgba(0,0,0,.57);
+}
+h1,
+h2,
+h3,
+input,
+textarea,
+*[contentEditable],
+strong,
+h4,
+label.show-text,
+label.has-input,
+label .important,
+body > nav > ul > li > a
+{
+  color: rgba(0,0,0,.57);
+}
+.card
+{
+  background: #FFF;
+  border-color: rgba(0,0,0,.15);
+}
+body > header,
+body > header *,
+.card > header,
+.card > header *,
+button,
+.button
+{
+  background: #428bca;
+  color: rgba(255,255,255,.87);
+  border-color: rgba(255,255,255,.57);
+}
+button:hover,
+button:focus,
+.button:hover,
+.button:focus
+{
+  background: #7550ff;
+  color: #fff;
+}
+input:focus,
+textarea:focus,
+*[contentEditable]:focus
+{
+  color: #428bca;
+  border-color: #428bca;
+}
+a,
+.link
+{
+  color: #428bca;
+}
+a:hover,
+a:focus,
+.link:hover,
+.link:focus,
+body > nav > ul > li > a:hover,
+body > nav > ul > li > a:focus
+{
+  color: #7550ff;
+}
+.note
+{
+  border-color: #428bca;
+}
+/*
+  this b-shit needs to be on seprate lines for cross browser support .......
+*/
+::-moz-selection
+{
+  background: #428bca;
+  color: rgba(255,255,255,.87);
+}
+::selection
+{
+  background: #428bca;
+  color: rgba(255,255,255,.87);
+}
+table thead th,
+table tfoot th
+{
+  border-color: rgba(0,0,0,.57);
+}
+table td,
+table th,
+hr,
+body > nav > header,
+body > nav
+{
+  border-color: rgba(0,0,0,.15);
+}
+table.table--striped tbody tr:nth-child(odd)
+{
+  background-color: rgba(0,0,0,.05);
+}
+table.table--hover tbody tr:hover td
+{
+  border-bottom-color: #428bca;
+}
+.loading,
+body > nav
+{
+  background-color: #fff;
+}
+.sk-folding-cube .sk-cube:before
+{
+  background-color: #929292;
+}
+code
+{
+  color: #000;
+}
+.progress .determinate,
+.progress .indeterminate
+{
+  background-color: #7550ff;
+}
+.dropdown__menu
+{
+  border-color: rgba(255,255,255,.57);
+}
+.dropdown__menu
+{
+  background: #fafafa;
+}
+.dropdown__menu *
+{
+  background: transparent;
+}
+.dropdown__menu a
+{
+  color: #428bca;
+}
+.dropdown__menu a:hover,
+.dropdown__menu a:focus
+{
+  color: #7550ff;
+}
+.options__option
+{
+  color: #428bca;
+  border-color: rgba(0,0,0,.3);
+}
+.options__option:hover
+{
+  background: rgba(0,0,0,.04);
+  color: #7550ff;
+}
+.input-group
+{
+  background: #f5f5f5;
+  border-color: #e5e5e5;
+}
+.input-group .input-group__control button,
+.input-group .input-group__control .button
+{
+  background: transparent;
+  color: rgba(0,0,0,.57);
+}
+.input-group .input-group__control button:hover,
+.input-group .input-group__control button:focus,
+.input-group .input-group__control .button:hover,
+.input-group .input-group__control .button:focus
+{
+  color: #7550ff;
+}
+[contentEditable]:before
+{
+  color: rgba(0,0,0,.4);
+}
+::-webkit-input-placeholder
+{
+  color: rgba(0,0,0,.4);
+}
+::-moz-placeholder
+{
+  color: rgba(0,0,0,.4);
+}
+:-ms-input-placeholder
+{
+  color: rgba(0,0,0,.4);
+}
+:-moz-placeholder
+{
+  color: rgba(0,0,0,.4);
+}
+
+.mainColor
+{
+  color: #428bca;
+}
+.hoverMainColor:hover
+{
+  color: #428bca;
+}
+.mainColorBg
+{
+  background-color: #428bca;
+}

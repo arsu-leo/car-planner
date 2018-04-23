@@ -6,6 +6,6 @@ log     = require('@superhero/debug').log;
 core.bootstrap(config.core.init).then(function() 
 {
     core.http(config.core.routes)
-    .listen(80);
+    .listen(8080);
     log("READY!");
 });

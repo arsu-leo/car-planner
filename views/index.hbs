@@ -1,1 +1,111 @@
-HIII!
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Car planner</title>
+
+  <!--<link rel="shortcut icon" href="">
+  <link rel="apple-touch-icon" href="">-->
+
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic">
+  <link rel="stylesheet" href="//cdn.adamo.es/css/master/reset.css?v=1">
+  <link rel="stylesheet" href="//cdn.adamo.es/css/master/grid.css?v=1">
+  <link rel="stylesheet" href="//cdn.adamo.es/css/master/helper.css?v=1">
+  <link rel="stylesheet" href="//cdn.adamo.es/css/master/typography.css?v=1">
+  <link rel="stylesheet" href="//cdn.adamo.es/css/master/material.css?v=1">
+  <link rel="stylesheet" href="//cdn.adamo.es/css/master/table.css?v=1">
+  <link rel="stylesheet" href="//cdn.adamo.es/css/master/progress.css?v=1">
+  <link rel="stylesheet" href="/css/color.css?v=1">
+  <link rel="stylesheet" href="//cdn.adamo.es/css/font-awesome.css?v=1">
+  <link rel="stylesheet" href="/css/master.css?v=2">
+
+  <body cz-shortcut-listen="true">
+    <form id="hidden-data" style="display: hidden" data-on-submit="api/on-submit">
+      <input type="hidden" name="id" value="{{ id }}">
+    </form>
+    <nav ng-controller="NavCtrl" ng-class="{'active' : show_menu}" class="ng-scope">
+      <header>
+        <div class="adamo-home-container">
+          <a href="/">
+            <img class="logo" src="/img/logo-leo.png" alt="Leo">
+          </a>
+        </div>
+      </header>
+      <!-- Left side menu -->
+      <div>
+        Available elements
+      </div>
+      <ul>
+        <li class="active">
+          <span class="menu-item-type">Scenarios</span>
+          <ul>
+            <li>
+              <a>Create</a>
+            </li>
+            <li>
+              <a>Scenario 1</a>
+            </li>
+          </ul>
+        </li>
+        <li class="active">
+          <span class="menu-item-type">Place</span>
+          <ul>
+            <li>
+              <a>Create</a>
+            </li>
+            <li>
+              <a>Place 1</a>
+            </li>
+          </ul>
+        </li>
+        <li class="active">
+          <span class="menu-item-type">Car</span>
+          <ul>
+            <li>
+              <a>Create</a>
+            </li>
+            <li>
+              <a>Car 1</a>
+            </li>
+          </ul>
+        </li>
+        <li class="active">
+          <span class="menu-item-type">Car</span>
+          <ul>
+            <li>
+              <a>Person</a>
+            </li>
+            <li>
+              <a>Person 1</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <header>
+      <div class="grid">
+        <div class="row">
+          <div class="col-4-4">
+             Car planner
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+      <article>
+        <div class="grid">
+          </div>
+          <div class="col-4-4 main-pane" style="min-height: 600px;">
+          </div>
+        </div>
+      </article>
+    </main>
+    <script data-main="/js/main" src="//cdn.adamo.es/js/require-2.2.0.js"></script>
+  </body>
+</html>
