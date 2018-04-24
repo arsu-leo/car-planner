@@ -1,9 +1,18 @@
-body {
-    
-}
-
 .logo {
   height: 40px;
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+.menu-hide {
+  float: right;
+  margin-top: 15px;
+  margin-right: 10px;
+}
+
+@media(min-width:1440px)
+{
+  menu-hide {
+    display: none;
+  }
 }

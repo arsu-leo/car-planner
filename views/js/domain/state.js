@@ -22,6 +22,8 @@ define(
     __getStoredData(id)
     {
       var data = this.storage.getItem(this.prefix + id);
+      
+
       return data;
     }
     getLastStored()
@@ -32,7 +34,6 @@ define(
     load(id)
     {
       //Storage
-      debugger;
       var data;
       if(id == 'test')
       {
