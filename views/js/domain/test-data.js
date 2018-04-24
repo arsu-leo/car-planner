@@ -5,7 +5,8 @@ define(
   'classes/Person',
   'classes/Place',
   'classes/Scenario',
-], function(getBaseState, Car, Person, Place, Scenario){
+  'classes/helpers/compose-id'
+], function(getBaseState, Car, Person, Place, Scenario, composeId){
   var basePersons = ['Alicia', 'Leo', 'Encarni', 'Manolo', 'Elena', 'Rosa', 'Nerea', 'Jenny', 'Jana', 'German', 'Francesc', 'Kaka'];
   var baseCars = ['AliCar', 'TorresCar', 'RosaCar', 'NereaCar', 'JennyCar',  'FranCar'];
   var basePlaces = ['CasaPapis', 'CasaAli'];
@@ -43,6 +44,7 @@ define(
       created.persons[baseScenarios[a]] = p;
       state.scenarios.push(p);
     }
+    state.id = composeId('','','');
     return state;
   }
 

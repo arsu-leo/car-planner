@@ -10,6 +10,7 @@ define(
       this.persons = [];
       this.cars = [];
       this.places = [];
+      this.type = 'Scenario';
     }
 
     getId()

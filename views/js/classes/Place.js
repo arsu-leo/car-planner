@@ -9,6 +9,7 @@ define(
       this.name = name;
       this.cars = [];
       this.persons = [];
+      this.type = 'Place';
     }
 
     getId()

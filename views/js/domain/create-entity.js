@@ -24,5 +24,7 @@ define([
       default:
         throw new Error("Unknown type '" + type + "'");
     };
+    debugger;
+    state.store();
   };
 });

@@ -6,7 +6,7 @@ define(
   var separator = '-';
   return function(type, name, sep)
   {
-    sep = sep || separator;
+    sep = sep === undefined ? separator : sep;
     var a = new Date();
     return type 
       + sep 

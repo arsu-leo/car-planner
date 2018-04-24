@@ -9,6 +9,7 @@ define(
       this.name = name;
       this.capacity = parseInt(capacity);
       this.persons = [];
+      this.type = 'Car';
     }
 
     getId()

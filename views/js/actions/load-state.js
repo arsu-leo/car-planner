@@ -8,23 +8,14 @@ define(
   return function(id) {
     //Storage
     var data = undefined;
-    if(id)
+    data = state.load(id);
+    if(!data)
     {
-      data = state.load(id);
-      if(!data)
-      {
-        console.log(`Data for id ${id} not found, loading a base state`);
-        data = getBaseState();
-        data.id = composeId('','','');
-      }
-      state.store(data);
-    }
-    else
-    {
+      console.log(`Data for id ${id} not found, loading a base state`);
       data = getBaseState();
       data.id = composeId('','','');
-      state.store(data);
     }
+    state.store(data);
     return state.get();
   }
 });

@@ -7,6 +7,7 @@ define(
     {
       this.id = composeId(typeName, name);
       this.name = name;
+      this.type = 'Person';
     }
 
     getName()
