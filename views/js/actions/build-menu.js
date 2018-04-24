@@ -25,22 +25,22 @@ define(
   }
   var model = {
     person : {
-      template  : '/hbs/menu-item',
+      template  : '/hbs/menu/menu-item',
       field     : 'persons',
       icon      : '<i class="fa fa-user-o"></i>'
     },
     car : {
-      template  : '/hbs/menu-item',
+      template  : '/hbs/menu/menu-item',
       field     : 'cars',
       icon      : '<i class="fa fa-car"></i>'
     },
     place : {
-      template  : '/hbs/menu-item',
+      template  : '/hbs/menu/menu-item',
       field     : 'places',
       icon      : '<i class="fa fa-home"></i>'
     },
     scenario : {
-      template  : '/hbs/menu-item',
+      template  : '/hbs/menu/menu-item',
       field     : 'scenarios',
       icon      : '<i class="fa fa-picture-o"></i>'
     }
@@ -49,7 +49,7 @@ define(
   return function(state, cb) {
     dom.select('.data-menu').remove();
     var nav = dom.select('.menu-available-elements').parent('nav', true);
-    templater.compile('/hbs/menu',{}, function(html){
+    templater.compile('/hbs/menu/menu',{}, function(html){
       nav.append(html);
       nav = nav.select('.data-menu');
       var keys = Object.keys(model);
@@ -59,12 +59,13 @@ define(
       var fn = function(i)
       {
         if(i >= keys.length)
-          return cb();
+          return cb && cb();
         
         var key = keys[i];
         var mod = model[key];
         buildList(state[mod.field], key, mod.icon, mod.template, function(html){
-          nav.select('.menu-item-type.menu-' + key).getSiblings('ul').append(html);
+          var menuType = nav.select('.menu-item-type.menu-' + key)
+          menuType.getSiblings('ul').append(html);
           fn(i + 1);
         });
       };

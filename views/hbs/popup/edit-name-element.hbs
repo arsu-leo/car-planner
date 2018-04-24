@@ -1,0 +1,17 @@
+<form data-on-submit="ev/cancel-submit">
+  <div class="content">
+    <div class="row">
+      <input type="hidden" name="id" value="{{id}}">
+      <input type="hidden" name="type" value="{{type}}">
+      <div class="col-2-4">
+        <label class="{{#if name}}has-input{{/if}}">
+          Name
+          <input type="text" name="name" placeholder="Name" value="{{name}}">
+        </label>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <button class="flat" type="button" data-on-click="ev/submit-edit-element">Guardar</button>
+  </footer>
+</form>

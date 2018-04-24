@@ -3,7 +3,7 @@ define(
  'domain/local-storage',
  'domain/test-data'
  //Api store?
-], function(storage, getTestData, getPaddedDate, getPaddedTime){
+], function(storage, getTestData){
   var prefix = 'car-planner-';
 
   class Storage {
