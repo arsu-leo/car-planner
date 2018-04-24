@@ -1,7 +1,32 @@
 define(
 [
 ], function(){
-return window.localStorage || {
+return window.localStorage 
+  ? {
+    setItem : function(id, val)
+    {
+      return window.localStorage.setItem(id, JSON.stringify(val));
+    },
+
+    getItem : function(id)
+    {
+      var r = window.localStorage.getItem(id);
+      return r !== null && r !== undefined
+      ? JSON.parse(r)
+      : r;
+    },
+
+    removeItem : function(id)
+    {
+      return window.localStorage.removeItem(id);
+    },
+
+    clear : function()
+    {
+      return window.localStorage.clear();
+    }
+  } 
+  : {
     /**
      * @private
      */

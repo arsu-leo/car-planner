@@ -2,9 +2,8 @@ define(
 [
  'domain/state',
  'domain/base-state',
- 'domain/padded-date',
-  'domain/padded-time'
-], function(state, getBaseState, getPaddedDate, getPaddedTime)
+ 'classes/helpers/compose-id'
+], function(state, getBaseState, composeId)
 {
   return function(id) {
     //Storage
@@ -16,14 +15,14 @@ define(
       {
         console.log(`Data for id ${id} not found, loading a base state`);
         data = getBaseState();
-        data.id = randomId();
+        data.id = composeId('','','');
         state.store(data);
       }
     }
     else
     {
       data = getBaseState();
-      data.id = randomId();
+      data.id = composeId('','','');
       state.store(data);
     }
     return data;

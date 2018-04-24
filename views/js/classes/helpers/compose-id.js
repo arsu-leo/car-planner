@@ -3,9 +3,10 @@ define(
 'domain/padded-date',
 'domain/padded-time'
 ], function(getPaddedDate, getPaddedTime){
-  var sep = '-';
-  return function(type, name)
+  var separator = '-';
+  return function(type, name, sep)
   {
+    sep = sep || separator;
     var a = new Date();
     return type 
       + sep 

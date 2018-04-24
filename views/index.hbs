@@ -29,7 +29,7 @@
     <form id="hidden-data" style="display: hidden" data-on-submit="api/on-submit">
       <input type="hidden" name="id" value="{{ id }}">
     </form>
-    <nav ng-controller="NavCtrl" ng-class="{'active' : show_menu}" class="ng-scope">
+    <nav class="active">
       <header>
         <div class="adamo-home-container">
           <a href="/">
@@ -38,54 +38,10 @@
         </div>
       </header>
       <!-- Left side menu -->
-      <div>
+      <div class="menu-available-elements">
         Available elements
       </div>
-      <ul>
-        <li class="active">
-          <span class="menu-item-type">Scenarios</span>
-          <ul>
-            <li>
-              <a>Create</a>
-            </li>
-            <li>
-              <a>Scenario 1</a>
-            </li>
-          </ul>
-        </li>
-        <li class="active">
-          <span class="menu-item-type">Place</span>
-          <ul>
-            <li>
-              <a>Create</a>
-            </li>
-            <li>
-              <a>Place 1</a>
-            </li>
-          </ul>
-        </li>
-        <li class="active">
-          <span class="menu-item-type">Car</span>
-          <ul>
-            <li>
-              <a>Create</a>
-            </li>
-            <li>
-              <a>Car 1</a>
-            </li>
-          </ul>
-        </li>
-        <li class="active">
-          <span class="menu-item-type">Car</span>
-          <ul>
-            <li>
-              <a>Person</a>
-            </li>
-            <li>
-              <a>Person 1</a>
-            </li>
-          </ul>
-        </li>
+      <ul class="data-menu">
       </ul>
     </nav>
     <header>

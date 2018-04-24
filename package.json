@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/arsu-leo/car-planner#readme",
   "dependencies": {
-    "@superhero/core": "^0.5.8",
+    "@superhero/core": "^0.5.10",
     "@superhero/debug": "^1.1.4"
   }
 }

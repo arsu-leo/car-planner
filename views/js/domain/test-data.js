@@ -43,6 +43,7 @@ define(
       created.persons[baseScenarios[a]] = p;
       state.scenarios.push(p);
     }
+    return state;
   }
 
 });
