@@ -13,7 +13,6 @@ define(
     {
       console.log(`Data for id ${id} not found, loading a base state`);
       data = getBaseState();
-      data.id = composeId('','','');
     }
     state.store(data);
     return state.get();

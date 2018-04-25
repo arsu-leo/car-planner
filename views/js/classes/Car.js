@@ -5,7 +5,7 @@ define(
   return class {
     constructor(name, capacity, id)
     {
-      this.id = composeId(typeName, name);
+      this.id = id || composeId(typeName, name);
       this.name = name;
       this.capacity = parseInt(capacity);
       this.persons = [];

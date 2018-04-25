@@ -1,9 +1,10 @@
 define(
 [
  'domain/local-storage',
- 'domain/test-data'
+ 'domain/test-data',
+ 'domain/base-state',
  //Api store?
-], function(storage, getTestData){
+], function(storage, getTestData, getBaseState){
   var prefix = 'car-planner-';
 
   class Storage {
@@ -22,9 +23,10 @@ define(
     __getStoredData(id)
     {
       var data = this.storage.getItem(this.prefix + id);
-      
-
-      return data;
+            //parse
+      var st = getBaseState();
+      st.loadFromObjectState(data);
+      return st;
     }
     getLastStored()
     {

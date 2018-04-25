@@ -8,23 +8,28 @@ define([
   return function(type, map)
   {
     var data = state.get();
+    var element = undefined;
     switch(type)
     {
       case 'car':
-        data.cars.push(new Car(map.name, map.capacity))
+        element = new Car(map.name, map.capacity);
+        data.cars.push(element)
         break;
       case 'person':
-        data.persons.push(new Person(map.name));
+        element = new Person(map.name);
+        data.persons.push(element);
         break;
       case 'scenario':
-        data.scenarios.push(new Scenario(map.name));
+        element = new Scenario(map.name);
+        data.scenarios.push(element);
         break;
       case 'place':
-        data.places.push(new Place(map.name));
+        element = new Place(map.name);
+        data.places.push(element);
       default:
         throw new Error("Unknown type '" + type + "'");
     };
-    debugger;
     state.store();
+    return element;
   };
 });
