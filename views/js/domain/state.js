@@ -22,7 +22,7 @@ define(
 
     __getStoredData(id)
     {
-      var data = this.storage.getItem(this.prefix + id);
+      var data = this.storage.getItem(id);
             //parse
       var st = getBaseState();
       st.loadFromObjectState(data);

@@ -6,6 +6,7 @@ require(
  'actions/load-current-state',
  'actions/build-menu'
 ], function(u,o, dom, loadCurrentState, buildMenu){
+  debugger;
   var data = loadCurrentState();
   if(data.id)
     dom.select('#hidden-data input[name="id"]').setValue(data.id);

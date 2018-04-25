@@ -4,9 +4,15 @@ define([
   'classes/Car',
   'classes/Place',
   'classes/Scenario'
-], function(composeId){
+], function(composeId, Person, Car, Place, Scenario){
     var typeName = 'st';
-  
+    var classes = {
+      'Person'  : Person,
+      'Car'     : Car,
+      'Place'   : Place,
+      'Scenario': Scenario
+    };
+
     return class {
       constructor(name, id)
       {
@@ -17,6 +23,7 @@ define([
         this.places = [];
         this.cars = [];
         this.persons = [];
+        this.activeScenario = undefined;
       }
     
       getName()
@@ -28,20 +35,44 @@ define([
       {
         return this.id;
       }
-  
+      
+      getActiveScenario()
+      {
+        return this.activeScenario;
+      }
+
+      setActiveScenario(sId)
+      {
+        var s = this.getScenario(sId);
+        if(s)
+          this.activeScenario = s;
+        return this;
+      }
       setName(n)
       {
         this.name = n;
         return this;
       }
 
-      __getElement(list, id, attr)
+
+      __copyElement(e)
+      {
+        var r = new classes[e.constructor.name](e.getName());
+        var k = Object.keys(e);
+        for(var a = 0; a < k.length; ++a)
+        {
+          r[k[a]] = e[k[a]];
+        }
+        return r;
+      }
+
+      __getElement(list, id, attr, copy)
       {
         attr = attr || 'id';
         for(var a = 0; a < list.length; a++)
         {
           if(list[a][attr] == id)
-            return list[a];
+            return copy ? this.__copyElement(list[a]) : list[a];
         }
         return false; 
       }
@@ -51,21 +82,41 @@ define([
         return getElement(this.scenarios, id, 'id');
       }
 
+      copyScenario(id)
+      {
+        return getElement(this.scenarios, id, 'id', true); 
+      }
+
       getPlace(id)
       {
         return getElement(this.places, id, 'id');
+      }
+
+      copyPlace(id)
+      {
+        return getElement(this.places, id, 'id', true);
       }
       
       getCar(id) {
         return getElement(this.cars, id, 'id');
       }
       
+      copyCar(id) {
+        return getElement(this.cars, id, 'id', true);
+      }
+
       getPerson(id) {
         return getElement(this.persons, id, 'id');
       }
 
+      copyPerson(id) {
+        return getElement(this.persons, id, 'id', true);
+      }
+
       loadFromObjectState(state)
       {
+        if(!state)
+          return this;
         this.scenarios = [];
         this.places = [];
         this.cars = [];
@@ -75,64 +126,71 @@ define([
         this.name = state.name;
         this.type = state.type;
 
+
+        //Set the base data
         for(var a = 0; a < state.persons.length; ++a)
           this.persons.push(new Person(state.persons[a].name, state.persons[a].id));
 
-        var buildCar = function(c)
+        for(var a = 0; a < state.cars.length; ++a)
+          this.cars.push(new Car(state.cars[a].name, state.cars[a].capacity, state.cars[a].id));
+
+        for(var a = 0; a < state.places.length; ++a)
+          this.places.push(new Place(state.places[a].name, state.places[a].id));
+
+
+
+        var fillCar = function(car, stateCar)
         {
-          var car = new Car(c.name, c.capacity, c.id);
-          
-          for(var b = 0; b < c.persons.length; ++b)
+          for(var b = 0; b < stateCar.persons.length; ++b)
           {
-            var p = this.getPerson(c.persons[b].id);
+            var p = this.copyPerson(stateCar.persons[b].id);
             if(p)
               car.addPerson(p);
           }
           return car;
         }
-
-        for(var a = 0; a < state.cars.length; ++a)
-          this.cars.push(buildCar(state.cars[a]));
         
-        var buildPlace = function(p)
+        var fillPlace = function(place, statePlace)
         {
-          var place = new Place(p.name, p.id);
-          for(var b = 0; b < p.cars.length; ++b)
+          for(var b = 0; b < statePlace.cars.length; ++b)
           {
-            var car = this.getCar(p.cars[b].id);
-            if(car)
-              place.addCar(car);
+            var car = this.copyCar(statePlace.cars[b].id);
+            fillCar(car, statePlace.cars[b])
+            place.addCar(car);
           }
-          for(var b = 0; b < p.persons.length; ++b)
+          for(var b = 0; b < statePlace.persons.length; ++b)
           {
-            var p = this.getPerson(p.persons[b].id);
-            if(p)
-              place.addPerson(p);
+            var person = this.copyPerson(statePlace.persons[b].id);
+            if(person)
+              place.addPerson(person);
           }
           return place;
         }
-
-        for(var a = 0; a < state.places.length; ++a)
-          this.places.push(buildPlace(state.places[a]));
 
         var buildScenario = function(s)
         {
           var scenario = new Scenario(s.name, s.id);
           for(var b = 0; b < s.places.length; ++b)
           {
-            var place = this.getPlace(s.places[b].id);
+            var place = this.copyPlace(s.places[b].id);
             if(place)
+            {
+              fillPlace(place, s.places[b]);
               scenario.addPlace(place);
+            }
           }
           for(var b = 0; b < s.cars.length; ++b)
           {
-            var car = this.getCar(s.cars[b].id);
+            var car = this.copyCar(s.cars[b].id);
             if(car)
+            {
+              fillCar(car, s.cars[b]);
               scenario.addCar(car);
+            }
           }
           for(var b = 0; b < s.persons.length; ++b)
           {
-            var p = this.getPerson(s.persons[b].id);
+            var p = this.copyPerson(s.persons[b].id);
             if(p)
               scenario.addPerson(p);
           }
@@ -141,6 +199,8 @@ define([
 
         for(var a = 0; a < state.scenarios.length; ++a)
           this.scenarios.push(buildScenario(state.scenarios[a]));
+
+        return this;
       }
     }
   });
