@@ -8,6 +8,7 @@ define([
   {
     var target = dom.from(e.target).parent('a', true);
     var type = target.getData('type');
+
     if(type != 'scenario')
       return;
 
@@ -15,8 +16,8 @@ define([
     if(!id)
       return;
 
-    var state = state.get();
-    state.setActiveScenario(id);
+    var status = state.get();
+    status.setActiveScenario(id);
     renderMain();
   };
 });

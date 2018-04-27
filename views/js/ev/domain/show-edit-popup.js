@@ -33,10 +33,12 @@ define([
   {
     dom.select('.dialog, .overlay').remove();
     var copy = {};
-    for(var k in Object.keys(element)){
-      copy[k] = element[k];
+    var keys = Object.keys(element);
+    for(var a = 0; a < keys.length; ++a){
+      copy[keys[a]] = element[keys[a]];
     }
     copy.type = type;
+    copy.mode = action;
     templater.compile('/hbs/popup/' + getTemplate(type), copy, function(html)
     {
       templater.compile('/hbs/popup/base-popup', { header : getHeader(action, element, type), content : html}, function(html)

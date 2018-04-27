@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-4-4 car-pane">
+    <input type="hidden" name="id" value="{{id}}">
+    <div class="row">
+      <div class="col-4-4 car-name">
+        <h4>
+          <i class="fa fa-car"></i> {{name}} ({{persons.length}}/{{capacity}})
+        </h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4-4 car-content">
+        <div class="row">
+          <div class="col-4-4 car-set-content">
+            <div class="row">
+              <div class="col-4-4 car-persons">
+                {{#each persons}}
+                  {{> person this}}
+                {{/each}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </idv>
+  </div>
+</div>

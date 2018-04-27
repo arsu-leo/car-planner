@@ -25,5 +25,13 @@ define(
       this.name = n;
       return this;
     }
+
+    getContext()
+    {
+      return {
+        id   : this.id,
+        name : this.name
+      };
+    }
   }
 });

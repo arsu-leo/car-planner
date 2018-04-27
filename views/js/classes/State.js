@@ -38,79 +38,106 @@ define([
       
       getActiveScenario()
       {
-        return this.activeScenario;
+        return this.getScenario(this.activeScenario);
       }
 
       setActiveScenario(sId)
       {
         var s = this.getScenario(sId);
         if(s)
-          this.activeScenario = s;
+          this.activeScenario = sId;
         return this;
       }
+
       setName(n)
       {
         this.name = n;
         return this;
       }
 
-
-      __copyElement(e)
+      __copyElement(list, id, attr)
       {
-        var r = new classes[e.constructor.name](e.getName());
-        var k = Object.keys(e);
-        for(var a = 0; a < k.length; ++a)
+        var e = this.__getElement(list, id, attr);
+        if(e)
         {
-          r[k[a]] = e[k[a]];
+          var r = new classes[e.constructor.name](e.getName());
+          var k = Object.keys(e);
+          for(var a = 0; a < k.length; ++a)
+          {
+            r[k[a]] = e[k[a]];
+          }
         }
         return r;
       }
 
-      __getElement(list, id, attr, copy)
+      __getElementIndex(list, id, attr)
       {
         attr = attr || 'id';
         for(var a = 0; a < list.length; a++)
         {
           if(list[a][attr] == id)
-            return copy ? this.__copyElement(list[a]) : list[a];
+            return a;
         }
         return false; 
       }
 
-      getScenario(id)
+      __getElement(list, id, attr)
       {
-        return getElement(this.scenarios, id, 'id');
+        var index = this.__getElementIndex(list, id, attr);
+        return index !== false ? list[index] : false;
       }
 
-      copyScenario(id)
+      getElement(type, id)
       {
-        return getElement(this.scenarios, id, 'id', true); 
+        switch(type)
+        {
+          case 'scenario':
+            return this.getScenario(id);
+          case 'place':
+            return this.getPlace(id);
+          case 'car':
+            return this.getCar(id);
+          case 'person':
+            return this.getPerson(id);
+          default:
+            return false;
+        }
+      }
+      
+      getScenario(id)
+      {
+        return this.__getElement(this.scenarios, id, 'id');
       }
 
       getPlace(id)
       {
-        return getElement(this.places, id, 'id');
+        return this.__getElement(this.places, id, 'id');
+      }
+
+      getCar(id) {
+        return this.__getElement(this.cars, id, 'id');
+      }
+
+      getPerson(id) {
+        return this.__getElement(this.persons, id, 'id');
       }
 
       copyPlace(id)
       {
-        return getElement(this.places, id, 'id', true);
+        return this.__copyElement(this.places, id, 'id');
       }
       
-      getCar(id) {
-        return getElement(this.cars, id, 'id');
+      copyScenario(id)
+      {
+        return this.__copyElement(this.scenarios, id, 'id'); 
       }
       
       copyCar(id) {
-        return getElement(this.cars, id, 'id', true);
-      }
-
-      getPerson(id) {
-        return getElement(this.persons, id, 'id');
+        return this.__copyElement(this.cars, id, 'id');
       }
 
       copyPerson(id) {
-        return getElement(this.persons, id, 'id', true);
+        return this.__copyElement(this.persons, id, 'id');
       }
 
       loadFromObjectState(state)
@@ -200,7 +227,130 @@ define([
         for(var a = 0; a < state.scenarios.length; ++a)
           this.scenarios.push(buildScenario(state.scenarios[a]));
 
+        if(state.activeScenario && this.__getScenarioIndex(state.activeScenario))
+          this.setActiveScenario(state.activeScenario);
+
         return this;
+      }
+
+      edit(type, map)
+      {
+        var element = this.getElement(type, map.id);
+        element.setName(map.name);
+        if(type == 'car')
+          element.setCapacity(map.capacity);
+        return element;
+      }
+
+      create(type, map)
+      {
+        var element = undefined;
+        switch(type)
+        {
+          case 'car':
+            element = new Car(map.name, map.capacity);
+            this.cars.push(element)
+            break;
+          case 'person':
+            element = new Person(map.name);
+            this.persons.push(element);
+            break;
+          case 'scenario':
+            element = new Scenario(map.name);
+            this.scenarios.push(element);
+            break;
+          case 'place':
+            element = new Place(map.name);
+            this.places.push(element);
+          default:
+            throw new Error("Unknown type '" + type + "'");
+        };
+        return element;
+      }
+
+      __getPersonIndex(id)
+      {
+        return this.__getElementIndex(this.persons, id, 'id');
+      }
+
+      __getCarIndex(id)
+      {
+        return this.__getElementIndex(this.cars, id, 'id');
+      }
+
+      __getPlaceIndex(id)
+      {
+        return this.__getElementIndex(this.places, id, 'id');
+      }
+
+      __getScenarioIndex(id)
+      {
+        return this.__getElementIndex(this.scenarios, id, 'id');
+      }
+
+      deletePerson(pId)
+      {
+        for(var a = 0; a < this.scenarios.length; ++a)
+          this.scenarios[a].deletePerson(pId);
+        for(var a = 0; a < this.places.length; ++a)
+          this.places[a].deletePerson(pId);
+        for(var a = 0; a < this.cars.length; ++a)
+          this.cars[a].removePerson(pId);
+
+        var index = this.__getPersonIndex(pId);
+        if(index !== 0)
+          this.persons.splice(index, 1);
+      }
+
+      deleteCar(cId)
+      {
+        for(var a = 0; a < this.scenarios.length; ++a)
+          this.scenarios[a].deleteCar(cId);
+        for(var a = 0; a < this.places.length; ++a)
+          this.places[a].removeCar(cId, true);
+
+        var index = this.__getCarIndex(cId);
+        if(index !== 0)
+          this.cars.splice(index, 1);
+      }
+
+      deletePlace(pId)
+      {
+        for(var a = 0; a < this.scenarios.length; ++a)
+          this.scenarios[a].removePlace(cId, true, true);
+
+        var index = this.__getPlaceIndex(pId);
+        if(index !== 0)
+          this.places.splice(index, 1);
+      }
+
+      deleteScenario(sId)
+      {
+        var index = this.__getScenarioIndex(sId);
+        if(index !== 0)
+          this.scenarios.splice(index, 1);
+      }
+
+      delete(type, map)
+      {
+        var id = map.id;
+        if(!id)
+          return;
+        switch(type)
+        {
+          case 'person':
+            this.deletePerson(id);
+            break;
+          case 'car':
+            this.deleteCar(id);
+            break;
+          case 'place':
+            this.deletePlace(id);
+            break;
+          case 'scenario':
+            this.deleteScenario(id);
+            break;
+        }
       }
     }
   });

@@ -3,6 +3,7 @@
     <div class="row">
       <input type="hidden" name="id" value="{{id}}">
       <input type="hidden" name="type" value="{{type}}">
+      <input type="hidden" name="mode" value="{{mode}}">
       <div class="col-2-4">
         <label class="{{#if name}}has-input{{/if}}">
           Name
@@ -19,5 +20,10 @@
   </div>
   <footer>
     <button class="flat" type="button" data-on-click="ev/submit-edit-element">Guardar</button>
+    {{#if mode '==' 'edit'}}
+      <div class="pull-right">
+        <i class="fa fa-trash" data-on-click="ev/submit-delete-element"></i>
+      </div>
+    {{/if}}
   </footer>
 </form>

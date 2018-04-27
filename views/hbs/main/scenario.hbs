@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-4-4 scenario-pane">
+    <input type="hidden" name="id" value="{{id}}">
+    <div class="row">
+      <div class="col-4-4 scenario-name">
+        <h2>
+          <i class="fa fa-picture-o"></i> {{name}}
+        </h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4-4 scenario-content">
+        <div class="row">
+          <div class="col-4-4 scenario-set-content">
+            <div class="row">
+              <div class="col-4-4 scenario-places">
+                {{#each places}}
+                  {{> place this}}
+                {{/each}}
+              </div>
+            </div>
+          </div>
+        </div>
+        {{#if cars.length '||' persons.length}}
+          <div class="row">
+            <div class="col-4-4 scenario-unset-content">
+              <div class="row">
+                <div class="col-4-4">
+                  Things not in place
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4-4">
+                  {{#each cars}}
+                    {{> car this}}
+                  {{/each}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4-4">
+                  {{#each persons}}
+                    {{> person this}}
+                  {{/each}}
+                </div>
+              </div>
+            </div>
+          </div>
+        {{/if}}
+      </div>
+    </idv>
+  </div>
+</div>

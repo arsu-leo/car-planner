@@ -84,5 +84,14 @@ define(
       }
       return this;
     }
+    getContext()
+    {
+      return {
+        id : this.id,
+        name : this.name,
+        capacity : this.capacity,
+        persons : this.persons.map(function(person){ return person.getContext(); })
+      };
+    }
   }
 });

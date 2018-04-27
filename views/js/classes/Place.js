@@ -81,6 +81,13 @@ define(
       return this;
     }
 
+    deletePerson(pId)
+    {
+      for(var a = 0; a < this.cars.length; a++)
+        this.cars[a].removePerson(pId);
+      this.removePerson(pId);
+    }
+
     getCar(cId)
     {
       for(var a = 0; a < this.cars.length; ++a)
@@ -127,6 +134,16 @@ define(
         }
       }
       return -1;
+    }
+
+    getContext()
+    {
+      return {
+        id      : this.id,
+        name    : this.name,
+        persons : this.persons.map(function(person){ return person.getContext(); }),
+        cars    : this.cars.map(function(car){ return car.getContext(); })
+      };
     }
   }
 });

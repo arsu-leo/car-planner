@@ -75,6 +75,13 @@ define(
       return this;
     }
 
+    deleteCar(cId)
+    {
+      for(var a = 0; a < this.places.length; ++a)
+        this.places[a].removeCar(cId, true);
+      this.removeCar(cId, true);
+    }
+
     getPersons()
     {
       return this.persons;
@@ -96,6 +103,15 @@ define(
         this.persons.splice(index, 1);
       }
       return this;
+    }
+
+    deletePerson(pId)
+    {
+      for(var a = 0; a < this.cars.length; ++a)
+        this.cars[a].removePeson(pId);
+      for(var a = 0; a < this.places.length; ++a)
+        this.places[a].deletePerson(pId);
+      this.removePerson(pId);
     }
 
     getPlaces()
@@ -209,6 +225,18 @@ define(
         }
       }
       return -1;
+    }
+
+    getContext()
+    {
+      var r = {
+        id      : this.id,
+        name    : this.name,
+        persons : this.persons.map(function(person){ return person.getContext() }),
+        cars    : this.cars.map(function(car){ return car.getContext() }),
+        places  : this.places.map(function(place){ return place.getContext() })
+      };
+      return r;
     }
   }
 });

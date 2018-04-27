@@ -7,9 +7,8 @@ define([
   return function(e){
     var form = dom.from(e.target).parent('form', true);
     var values = form.select('input').valueMap();
-    var mode   = values.mode;
 
-    changeEntity(values.mode, values.type, values);
+    changeEntity('delete', values.type, values);
     
     var done = 0;
     var tasks = 2;

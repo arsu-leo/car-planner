@@ -4,6 +4,18 @@
   margin-bottom: 5px;
 }
 
+.hide-pc {
+  display: none;
+}
+
+.cursor-pointer {
+  cursor:pointer;
+}
+
+.hover-color:hover {
+  color: #7550ff;
+}
+
 .menu-hide {
   float: right;
   margin-top: 15px;
@@ -12,7 +24,60 @@
 
 @media(min-width:1440px)
 {
-  menu-hide {
+  .hide-mobile {
     display: none;
   }
+  .hide-pc {
+    display: inherit;
+  }
+}
+
+/*Icon is for drag */
+.data-menu .menu-item-element i
+{
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+/*Icon is for except scenario */
+.data-menu .menu-item-element i.fa-picture-o
+{
+  cursor: pointer;
+}
+
+/*Span is for edit */
+.data-menu .menu-item-element span,
+.data-menu .menu-item-element i.fa-plus /* except the create */
+{
+  cursor: pointer;
+}
+
+
+.scenario-pane,
+.place-pane,
+.car-pane,
+.person-pane,
+{
+  padding: 5px;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+.scenario-content,
+.place-content,
+.car-content
+{
+  padding: 5px;
+}
+
+.scenario-unset-content,
+.place-unset-content
+{
+  margin-top: 5px;
+}
+
+
+.dragging
+{
+  font-size: 4em;
 }
