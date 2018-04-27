@@ -56,9 +56,8 @@ define(
     console.log("Bind drag");
     domElement.on('dragstart', function(ev){
       var target = ev.target;
-      var clone = target.cloneNode(true);
-      dom.from(clone).addClass('dragging');
-      ev.dataTransfer.setDragImage(clone,0 ,0);
+      
+      ev.dataTransfer.setDragImage(dom.select('img.draggable-image-' + element.type).get(0),0 ,0);
       //domElement;
 
       ev.dataTransfer.setData('id', element.id);

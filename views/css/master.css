@@ -81,3 +81,40 @@
 {
   font-size: 4em;
 }
+
+.draggable-cover-container
+{
+  position: relative;
+}
+.draggable-image
+{
+  height: 30px;
+  position: absolute;
+  top: -500px;
+  left: -500px;
+}
+
+.draggable-image-person
+{
+}
+
+.draggable-image-car
+{
+  top: -550px;  
+}
+
+.draggable-image-place
+{
+  top: -600px;
+}
+
+.draggable-cover
+{
+  width: 100%;
+  height: 35px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: #FAFAFA;
+  z-index: 2;
+}
