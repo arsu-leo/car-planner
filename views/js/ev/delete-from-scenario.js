@@ -30,6 +30,7 @@ define([
         scenario.removePlace(id, true, true);
         break;
     }
+    state.store()
     renderMain();
   }
 });

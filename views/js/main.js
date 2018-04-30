@@ -8,8 +8,10 @@ require(
  'actions/render-main'
 ], function(u,o, dom, loadCurrentState, buildMenu, renderMain){
   var data = loadCurrentState();
-  if(data.id)
+  if(data.id){
     dom.select('#hidden-data input[name="id"]').setValue(data.id);
+    dom.select('.adamo-home-container a').setAttribute('href', '/?id=' + data.id);
+  }
   
   buildMenu(function(){
     renderMain(function(){

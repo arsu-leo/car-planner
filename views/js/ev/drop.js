@@ -79,6 +79,7 @@ define([
         break;
     }
 
+    state.store();
     renderMain();
   }
 });

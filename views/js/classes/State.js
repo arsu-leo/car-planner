@@ -198,7 +198,7 @@ define([
         this.name = state.name;
         this.type = state.type;
 
-
+        var self = this;
         //Set the base data
         for(var a = 0; a < state.persons.length; ++a)
           this.persons.push(new Person(state.persons[a].name, state.persons[a].id));
@@ -215,7 +215,7 @@ define([
         {
           for(var b = 0; b < stateCar.persons.length; ++b)
           {
-            var p = this.copyPerson(stateCar.persons[b].id);
+            var p = self.copyPerson(stateCar.persons[b].id);
             if(p)
               car.addPerson(p);
           }
@@ -226,13 +226,13 @@ define([
         {
           for(var b = 0; b < statePlace.cars.length; ++b)
           {
-            var car = this.copyCar(statePlace.cars[b].id);
+            var car = self.copyCar(statePlace.cars[b].id);
             fillCar(car, statePlace.cars[b])
             place.addCar(car);
           }
           for(var b = 0; b < statePlace.persons.length; ++b)
           {
-            var person = this.copyPerson(statePlace.persons[b].id);
+            var person = self.copyPerson(statePlace.persons[b].id);
             if(person)
               place.addPerson(person);
           }
@@ -244,7 +244,7 @@ define([
           var scenario = new Scenario(s.name, s.id);
           for(var b = 0; b < s.places.length; ++b)
           {
-            var place = this.copyPlace(s.places[b].id);
+            var place = self.copyPlace(s.places[b].id);
             if(place)
             {
               fillPlace(place, s.places[b]);
@@ -253,7 +253,7 @@ define([
           }
           for(var b = 0; b < s.cars.length; ++b)
           {
-            var car = this.copyCar(s.cars[b].id);
+            var car = self.copyCar(s.cars[b].id);
             if(car)
             {
               fillCar(car, s.cars[b]);
@@ -262,7 +262,7 @@ define([
           }
           for(var b = 0; b < s.persons.length; ++b)
           {
-            var p = this.copyPerson(s.persons[b].id);
+            var p = self.copyPerson(s.persons[b].id);
             if(p)
               scenario.addPerson(p);
           }
