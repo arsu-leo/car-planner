@@ -4,8 +4,13 @@
   margin-bottom: 5px;
 }
 
-.hide-pc {
-  display: none;
+body {
+    position: relative;
+    margin-left: 240px;
+}
+
+body > nav {
+    left: 0;
 }
 
 .cursor-pointer {
@@ -16,38 +21,34 @@
   color: #7550ff;
 }
 
-.menu-hide {
-  float: right;
-  margin-top: 15px;
-  margin-right: 10px;
+.element-pane {
+  padding: 15px;
+  margin: 5px;
+  border: 1px solid blue;
+  border-radius: 15px;
 }
 
-@media(min-width:1440px)
-{
-  .hide-mobile {
-    display: none;
-  }
-  .hide-pc {
-    display: inherit;
-  }
+.person-pane {
+  padding: 5px;
+  margin: 5px;
+  border: none;
 }
 
 /*Icon is for drag */
-.data-menu .menu-item-element i
+.data-menu .menu-item-element [draggable="true"]
 {
   cursor: -webkit-grab;
   cursor: grab;
 }
 
 /*Icon is for except scenario */
-.data-menu .menu-item-element i.fa-picture-o
+.data-menu .menu-item-element > i
 {
   cursor: pointer;
 }
 
-/*Span is for edit */
-.data-menu .menu-item-element span,
-.data-menu .menu-item-element i.fa-plus /* except the create */
+
+.data-menu .menu-item-element i.fa-plus
 {
   cursor: pointer;
 }
@@ -117,4 +118,37 @@
   left: 0px;
   background-color: #FAFAFA;
   z-index: 2;
+}
+
+.placeholder
+{
+  display: none;
+  background-color: #AAAAAA;
+  padding: 6px;
+  border-radius: 5px;
+}
+
+.placeholder-image
+{
+  height: 30px;
+}
+
+
+.scenario-pane.dragover
+{
+  /*pointer-events: none;*/
+}
+
+.scenario-pane.dragover .placeholder.active
+{
+  display: inline-block;
+}
+
+.remove-button {
+  cursor: pointer;
+}
+
+.remove-button:hover
+{
+  color: red;
 }

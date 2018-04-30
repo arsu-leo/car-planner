@@ -84,11 +84,23 @@ define(
       }
       return this;
     }
+
+    removeElement(type, id)
+    {
+      switch(type){
+        case 'Person':
+          this.removePerson(id);
+          break;
+      }
+      return this;
+    }
+
     getContext()
     {
       return {
         id : this.id,
         name : this.name,
+        type : this.type,
         capacity : this.capacity,
         persons : this.persons.map(function(person){ return person.getContext(); })
       };

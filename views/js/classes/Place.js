@@ -88,6 +88,19 @@ define(
       this.removePerson(pId);
     }
 
+    removeElement(type, id)
+    {
+      switch(type){
+        case 'Person':
+          this.removePerson(id);
+          break;
+        case 'Car':
+          this.removeCar(id);
+          break;
+      }
+      return this;
+    }
+
     getCar(cId)
     {
       for(var a = 0; a < this.cars.length; ++a)
@@ -141,6 +154,7 @@ define(
       return {
         id      : this.id,
         name    : this.name,
+        type    : this.type,
         persons : this.persons.map(function(person){ return person.getContext(); }),
         cars    : this.cars.map(function(car){ return car.getContext(); })
       };

@@ -2,8 +2,11 @@ define(
 [
   '//cdn.adamo.es/js/gateway/dom.js',
   'domain/template',
-  'domain/state'
-], function(dom, templater, stat){
+  'domain/state',
+  'actions/domain/handle-drag-start',
+  'actions/domain/handle-drag-end',
+  'ev/scenario-selected'
+], function(dom, templater, stat, handleDragStart, handleDragEnd, scenarioSelected){
   function buildList(list, type, icon, template, cb)
   {
     var outputHtml = [];
@@ -29,43 +32,50 @@ define(
     person : {
       template  : '/hbs/menu/menu-item',
       field     : 'persons',
-      icon      : '<i draggable="true" class="fa fa-user-o"></i>',
+      icon      : '<i class="fa fa-user-o"></i>',
       draggable : true
     },
     car : {
       template  : '/hbs/menu/menu-item',
       field     : 'cars',
-      icon      : '<i draggable="true" class="fa fa-car"></i>',
+      icon      : '<i class="fa fa-car"></i>',
       draggable : true
     },
     place : {
       template  : '/hbs/menu/menu-item',
       field     : 'places',
-      icon      : '<i draggable="true" class="fa fa-home"></i>',
+      icon      : '<i class="fa fa-home"></i>',
       draggable : true
     },
     scenario : {
       template  : '/hbs/menu/menu-item',
       field     : 'scenarios',
-      icon      : '<i class="fa fa-picture-o" data-on-click="ev/scenario-selected"></i>'
+      icon      : '<i class="fa fa-picture-o"></i>'
     }
   };
 
   function bindDrag(domElement, element)
   {
-    console.log("Bind drag");
     domElement.on('dragstart', function(ev){
-      var target = ev.target;
-      
-      ev.dataTransfer.setDragImage(dom.select('img.draggable-image-' + element.type).get(0),0 ,0);
-      //domElement;
+      //ev.stopPropagation();
+      //var target = ev.target;
+      ev.dataTransfer.setData('fromMenu', 1);
+      var target = dom.select('.scenario-pane');
 
-      ev.dataTransfer.setData('id', element.id);
-      ev.dataTransfer.setData('type', element.type);
+      var input = dom.select('input[name="id"]');
+      var found = false;
+      input.each(function(i){
+        if(i.getValue() == element.getId())
+          found = true;
+      });
+      if(found){
+        ev.stopImmediatePropagation(); ev.stopPropagation(); ev.preventDefault();
+        return true;
+      }
+
+      handleDragStart(ev, element.id, element.type);
     });
-    domElement.on('dragend', function(ev){
-      //domElement.removeClass('dragging');
-    });
+    domElement.on('dragend', handleDragEnd);
   };
 
   return function(cb) {
@@ -88,9 +98,11 @@ define(
           var ul = menuType.getSiblings('ul');
           ul.append(html);
           if(mod.draggable)
-            ul.select('li i[draggable="true"]').each(function(domElement, index){
+            ul.select('li span').each(function(domElement, index){
+              domElement.setAttribute("draggable","true");
               bindDrag(domElement, state[mod.field][index]);
             });
+          ul.select('a[data-type="scenario"] span').on('click', scenarioSelected)
           fn(i + 1);
         });
       };

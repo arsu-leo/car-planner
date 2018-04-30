@@ -1,32 +1,42 @@
 <div class="row">
-  <div class="col-4-4 scenario-pane">
-    <input type="hidden" name="id" value="{{id}}">
-    <div class="row">
-      <div class="col-4-4 scenario-name">
-        <h2>
-          <i class="fa fa-picture-o"></i> {{name}}
-        </h2>
+  <div class="col-4-4">
+    <div class="scenario-pane element-pane">
+      <div style="display: none;" class="data-pane">
+        <input type="hidden" name="id" value="{{id}}">
+        <input type="hidden" name="type" value="{{type}}">
       </div>
-    </div>
-    <div class="row">
-      <div class="col-4-4 scenario-content">
-        <div class="row">
-          <div class="col-4-4 scenario-set-content">
-            <div class="row">
-              <div class="col-4-4 scenario-places">
-                {{#each places}}
-                  {{> place this}}
-                {{/each}}
+      <div class="row">
+        <div class="col-4-4 scenario-name">
+          <h2>
+            <i class="fa fa-picture-o"></i> {{name}}
+          </h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4-4 scenario-content">
+          <div class="row">
+            <div class="col-4-4 scenario-set-content">
+              <div class="row">
+                <div class="col-4-4 scenario-places">
+                  {{#each places}}
+                    {{> place this}}
+                  {{/each}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4-4">
+                  <div class="placeholder" data-accepted-drops="place">
+                    <img src="/img/place.png" class="placeholder-image">
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        {{#if cars.length '||' persons.length}}
-          <div class="row">
+          <div class="row ">
             <div class="col-4-4 scenario-unset-content">
               <div class="row">
                 <div class="col-4-4">
-                  Things not in place
+                  Elements not located in houses
                 </div>
               </div>
               <div class="row">
@@ -38,15 +48,29 @@
               </div>
               <div class="row">
                 <div class="col-4-4">
+                  <div class="placeholder" data-accepted-drops="car">
+                    <img src="/img/car.png" class="placeholder-image">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4-4">
                   {{#each persons}}
                     {{> person this}}
                   {{/each}}
                 </div>
               </div>
+              <div class="row">
+                <div class="col-4-4">
+                  <div class="placeholder" data-accepted-drops="person">
+                    <img src="/img/person.png" class="placeholder-image">
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        {{/if}}
+        </div>
       </div>
-    </idv>
+    </div>
   </div>
 </div>

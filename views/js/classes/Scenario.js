@@ -128,9 +128,9 @@ define(
       return this;
     }
 
-    removePlace(cId, stayPeople, stayCars)
+    removePlace(pId, stayPeople, stayCars)
     {
-      var index = this.getCarIndex(cId);
+      var index = this.getPlaceIndex(pId);
       if(index >= 0)
       {
         var place = this.places.splice(index, 1)[0];
@@ -227,10 +227,27 @@ define(
       return -1;
     }
 
+    removeElement(type, id)
+    {
+      switch(type){
+        case 'Person':
+          this.removePerson(id);
+          break;
+        case 'Car':
+          this.removeCar(id);
+          break;
+        case 'Place':
+          this.removePlace(id);
+          break;
+      }
+      return this;
+    }
+
     getContext()
     {
       var r = {
         id      : this.id,
+        type    : this.type,
         name    : this.name,
         persons : this.persons.map(function(person){ return person.getContext() }),
         cars    : this.cars.map(function(car){ return car.getContext() }),

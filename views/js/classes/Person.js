@@ -30,6 +30,7 @@ define(
     {
       return {
         id   : this.id,
+        type : this.type,
         name : this.name
       };
     }

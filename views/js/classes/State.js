@@ -54,13 +54,27 @@ define([
         this.name = n;
         return this;
       }
+      __getNewElement(type, name)
+      {
+        switch(type)
+        {
+          case 'Person':
+            return new Person(name);
+          case 'Car':
+            return new Car(name);
+          case 'Place':
+            return new Place(name);
+          case 'Scenario':
+            return new Scenario(name);
+        }
+      }
 
       __copyElement(list, id, attr)
       {
         var e = this.__getElement(list, id, attr);
         if(e)
         {
-          var r = new classes[e.constructor.name](e.getName());
+          var r = this.__getNewElement(e.type, e.getName());
           var k = Object.keys(e);
           for(var a = 0; a < k.length; ++a)
           {
@@ -85,6 +99,37 @@ define([
       {
         var index = this.__getElementIndex(list, id, attr);
         return index !== false ? list[index] : false;
+      }
+
+      getElement(type, id){
+        switch(type){
+          case 'Person':
+            return this.getPerson(id);
+          case 'Car':
+            return this.getCar(id);
+          case 'Place':
+            return this.getPlace(id);
+          case 'Scenario':
+            return this.getScenario(id);
+        }
+        return false;
+      }
+
+      getElement(type, id)
+      {
+        switch(type)
+        {
+          case 'scenario':
+            return this.getScenario(id);
+          case 'place':
+            return this.getPlace(id);
+          case 'car':
+            return this.getCar(id);
+          case 'person':
+            return this.getPerson(id);
+          default:
+            return false;
+        }
       }
 
       getElement(type, id)
